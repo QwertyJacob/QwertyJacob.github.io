@@ -1,154 +1,489 @@
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=soft&color=FF6B6B&height=300&section=header&text=Jesús%20F.%20Cevallos-Moreno&fontSize=50&animation=fadeIn&fontAlignY=35&desc=Postdoc%20Researcher%20%26%20Lecturer%20@%20University%20of%20Insubria&descSize=20&descAlignY=55" width="100%">
-</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesús F. Cevallos-Moreno | Academic Profile</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- AOS for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B',
+                        secondary: '#4285F4',
+                        dark: '#1a1a1a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .gradient-text {
+            background: linear-gradient(135deg, #FF6B6B 0%, #ff8e8e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        /* Fix for AOS hidden elements in screenshots */
+        .aos-init[data-aos].aos-animate {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
 
-<div align="center">
-  <img src="https://via.placeholder.com/150" width="150" height="150" style="border-radius: 50%; border: 5px solid #FF6B6B; margin-top: -75px; position: relative; z-index: 1;" alt="Profile Picture Placeholder">
-  <br><br>
-  <h1><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=FF6B6B&center=true&vCenter=true&width=500&lines=Hi%2C+I'm+Jes%C3%BAs+F.+Cevallos-Moreno;Postdoc+Researcher+%40+Insubria;Lecturer+%40+Insubria;Neural+Algorithmic+Reasoning+Expert" alt="Typing SVG" /></h1>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="text-xl font-bold gradient-text font-mono">Jesús.Cevallos()</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-primary font-medium transition">Home</a>
+                    <a href="#research" class="hover:text-primary font-medium transition">Research</a>
+                    <a href="#publications" class="hover:text-primary font-medium transition">Publications</a>
+                    <a href="#teaching" class="hover:text-primary font-medium transition">Teaching</a>
+                    <a href="#stats" class="hover:text-primary font-medium transition">Analytics</a>
+                    <a href="#contact" class="hover:text-primary font-medium transition">Connect</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-[![ORCID](https://img.shields.io/badge/ORCID-0000--0003--2752--4616-A6CE39?style=for-the-badge&logo=orcid&logoColor=white)](https://orcid.org/0000-0003-2752-4616)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-jesuscevallos-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jesuscevallos/)
-[![Twitter](https://img.shields.io/badge/X-@JesusCevallos9-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/JesusCevallos9)
-[![Website](https://img.shields.io/badge/Website-Personal--Page-FF6B6B?style=for-the-badge&logo=google-chrome&logoColor=white)](https://qwertyjacob.github.io)
-[![Google Scholar](https://img.shields.io/badge/Google%20Scholar-4285F4?style=for-the-badge&logo=google-scholar&logoColor=white)](https://scholar.google.com/citations?user=26o39YMAAAAJ&hl=en)
-</div>
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient min-h-[80vh] flex items-center pt-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 L100 0 L100 100 Z" fill="#FF6B6B"></path>
+            </svg>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 py-12">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="flex-shrink-0" data-aos="fade-right">
+                    <div class="relative">
+                        <div class="absolute -inset-1 bg-primary rounded-full blur opacity-30"></div>
+                        <img src="https://via.placeholder.com/200" alt="Jesús F. Cevallos-Moreno" class="relative w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-white object-cover shadow-2xl">
+                    </div>
+                </div>
+                <div class="text-center md:text-left" data-aos="fade-left">
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">
+                        Jesús F. <span class="text-primary">Cevallos-Moreno</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 font-light mb-8 max-w-2xl">
+                        Postdoc Researcher & Lecturer at <br class="hidden md:block">
+                        <span class="text-white font-semibold underline decoration-primary underline-offset-4">University of Insubria</span>
+                    </p>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <a href="https://orcid.org/0000-0003-2752-4616" target="_blank" class="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition border border-white/20 flex items-center gap-2">
+                            <i class="fa-brands fa-orcid text-[#A6CE39]"></i> ORCID
+                        </a>
+                        <a href="https://www.linkedin.com/in/jesuscevallos/" target="_blank" class="px-6 py-3 bg-[#0A66C2] hover:bg-opacity-90 text-white rounded-full transition flex items-center gap-2">
+                            <i class="fa-brands fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=26o39YMAAAAJ" target="_blank" class="px-6 py-3 bg-[#4285F4] hover:bg-opacity-90 text-white rounded-full transition flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap"></i> Google Scholar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%">
-</div>
+    <!-- Research Focus -->
+    <section id="research" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">🔬 Research Focus</h2>
+                <div class="h-1.5 w-20 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="p-8 rounded-2xl bg-gray-50 border-l-8 border-primary shadow-sm card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-primary text-4xl mb-4"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Cybersecurity & Inductive Biases</h3>
+                    <p class="text-gray-600 leading-relaxed">Researching Algorithmic Reasoning Inductive Biases specifically tailored for advanced cybersecurity defense mechanisms and threat detection.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-gray-50 border-l-8 border-secondary shadow-sm card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-secondary text-4xl mb-4"><i class="fa-solid fa-brain"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Human-Centred AI</h3>
+                    <p class="text-gray-600 leading-relaxed">Developing and analyzing Language Models with a focus on human-centric interactions, ethical treatment, and societal impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-## 🔬 Research Focus
+    <!-- Publications Section -->
+    <section id="publications" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">🎯 Full Publication List</h2>
+                <p class="text-gray-500 text-lg">Comprehensive research overview across AI, Security, and Bio-informatics</p>
+                <div class="h-1.5 w-20 bg-primary mx-auto rounded-full mt-4"></div>
+            </div>
 
-<div align="center">
-  <img src="https://img.shields.io/badge/Cybersecurity-FF6B6B?style=for-the-badge&logo=shield&logoColor=white" />
-  <img src="https://img.shields.io/badge/Neural_Algorithmic_Reasoning-4285F4?style=for-the-badge&logo=brain&logoColor=white" />
-  <img src="https://img.shields.io/badge/Human--Centred_AI-34A853?style=for-the-badge&logo=google-messages&logoColor=white" />
-  <img src="https://img.shields.io/badge/Active_Inference-FBBC05?style=for-the-badge&logo=target&logoColor=white" />
-</div>
+            <div class="grid lg:grid-cols-2 gap-x-12 gap-y-16">
+                <!-- Stream: Neural Algorithmic Reasoning for Cybersecurity -->
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3 text-dark">
+                        <span class="p-2 bg-primary/10 rounded-lg text-primary"><i class="fa-solid fa-microchip"></i></span>
+                        Neural Reasoning & Security
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-primary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://www.sciencedirect.com/science/article/pii/S1389128625002324" target="_blank" class="hover:text-primary transition">HERO: From High-dimensional network traffic to zERO-Day attack detection</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">Computer Networks, 2025</p>
+                            <div class="flex gap-2">
+                                <a href="https://www.sciencedirect.com/science/article/pii/S1389128625002324" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                                <a href="https://github.com/QwertyJacob/HERO" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition"><i class="fa-brands fa-github mr-1"></i> REPO</a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-primary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://www.sciencedirect.com/science/article/pii/S1389128624006601" target="_blank" class="hover:text-primary transition">ASAP: Automatic Synthesis of Attack Prototypes</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">Computer Networks (Elsevier), 2024</p>
+                            <div class="flex gap-2">
+                                <a href="https://www.sciencedirect.com/science/article/pii/S1389128624006601" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                                <a href="https://github.com/DISTA-IoT/smartville" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition"><i class="fa-brands fa-github mr-1"></i> REPO</a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-primary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://www.sciencedirect.com/science/article/pii/S0167404824002001" target="_blank" class="hover:text-primary transition">NERO: Neural Reasoning for zeRO-day attack detection in IoT</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">Computers & Security (Elsevier), 2024</p>
+                            <div class="flex gap-2">
+                                <a href="https://www.sciencedirect.com/science/article/pii/S0167404824002001" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                                <a href="https://github.com/QwertyJacob/NERO" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition"><i class="fa-brands fa-github mr-1"></i> REPO</a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-primary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://www.sciencedirect.com/science/article/pii/S1389128623004619" target="_blank" class="hover:text-primary transition">Deep RL for Intrusion Detection in IoT</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">Computer Networks (Elsevier), 2023</p>
+                            <div class="flex gap-2">
+                                <a href="https://www.sciencedirect.com/science/article/pii/S1389128623004619" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-primary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://www.techrxiv.org/users/925680/articles/1350771-acid-beta-testing-active-inference-for-active-cyber-defence" target="_blank" class="hover:text-primary transition">ACID: Active Inference for Active Cyber-Defence</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">TechRXiv Preprint, 2025</p>
+                            <div class="flex gap-2">
+                                <a href="https://www.techrxiv.org/users/925680/articles/1350771-acid-beta-testing-active-inference-for-active-cyber-defence" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                                <a href="https://github.com/DISTA-IoT/smartville" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition"><i class="fa-brands fa-github mr-1"></i> REPO</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<p align="center">
-  <b>Algorithmic Reasoning Inductive Biases for Cybersecurity</b> • <b>Human-centred Language Models</b>
-</p>
+                <!-- Stream: Ethical-AI & Human-Centric Systems -->
+                <div data-aos="fade-left">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3 text-dark">
+                        <span class="p-2 bg-secondary/10 rounded-lg text-secondary"><i class="fa-solid fa-shield-heart"></i></span>
+                        Ethical-AI & Human-Centric Systems
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-secondary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://dl.acm.org/doi/10.1145/3703454" target="_blank" class="hover:text-primary transition">Open-Ethical AI: Advances in Human-Centric NLMs</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">ACM Computing Surveys, Vol 57(4), 2024</p>
+                            <div class="flex gap-2">
+                                <a href="https://dl.acm.org/doi/10.1145/3703454" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-secondary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://www.sciencedirect.com/science/article/pii/S0952197626005981" target="_blank" class="hover:text-primary transition">Ethical Treatment of LMs Against Harmful Interventions</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">Eng. Applications of AI (Elsevier), Vol 172, 2026</p>
+                            <div class="flex gap-2">
+                                <a href="https://www.sciencedirect.com/science/article/pii/S0952197626005981" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                                <a href="https://github.com/QwertyJacob/genetica" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition"><i class="fa-brands fa-github mr-1"></i> REPO</a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-secondary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="#" target="_blank" class="hover:text-primary transition">HR-specific NLP for Skills Classification</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">Applied Artificial Intelligence, 2022</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs font-bold px-4 py-1.5 bg-gray-100 text-gray-400 rounded-full italic">Link Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-secondary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://f1000research.com/articles/11-518" target="_blank" class="hover:text-primary transition">DeepReGraph: Graph Learning for Gene Regulation</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">F1000Research, 2022</p>
+                            <div class="flex gap-2">
+                                <a href="https://f1000research.com/articles/11-518" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                                <a href="https://github.com/QwertyJacob/DeepReGraph" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition"><i class="fa-brands fa-github mr-1"></i> REPO</a>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-secondary card-hover">
+                            <h4 class="font-bold text-lg mb-2"><a href="https://www.mdpi.com/1999-5903/13/11/278" target="_blank" class="hover:text-primary transition">Deep RL for vCDN Service Function Chain Deployment</a></h4>
+                            <p class="text-sm text-gray-500 italic mb-4">Future Internet (MDPI), 2021</p>
+                            <div class="flex gap-2">
+                                <a href="https://www.mdpi.com/1999-5903/13/11/278" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full hover:bg-blue-200 transition"><i class="fa-solid fa-file-lines mr-1"></i> PAPER</a>
+                                <a href="https://github.com/QwertyJacob/e2d4qn_vcdn_sfc_deployment" target="_blank" class="text-xs font-bold px-4 py-1.5 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition"><i class="fa-brands fa-github mr-1"></i> REPO</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
----
+            <!-- Ph.D. Thesis Highlight -->
+            <div class="mt-16 bg-dark rounded-3xl p-8 md:p-12 text-white relative overflow-hidden" data-aos="zoom-in">
+                <div class="absolute top-0 right-0 p-8 text-primary opacity-20 text-9xl rotate-12">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="relative z-10">
+                    <span class="px-4 py-1 bg-primary/20 text-primary border border-primary/30 rounded-full text-xs font-bold uppercase tracking-widest">Ph.D. Dissertation</span>
+                    <h3 class="text-2xl md:text-3xl font-bold mt-4 mb-6">Deep Learning Applications over Heterogeneous Networks: <br class="hidden md:block"> From Multimedia to Genes</h3>
+                    <p class="text-gray-400 max-w-3xl mb-8 leading-relaxed">Defended at Sapienza University of Rome (2022). Exploring the intersection of neural architectures across diverse domains from signal processing to genetic regulatory networks.</p>
+                    <div class="flex items-center gap-6">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full border-2 border-dark bg-primary flex items-center justify-center text-xs font-bold">JD</div>
+                            <div class="w-10 h-10 rounded-full border-2 border-dark bg-secondary flex items-center justify-center text-xs font-bold">DL</div>
+                        </div>
+                        <span class="text-sm font-medium text-gray-300 italic">"Creativity meets systematic rigor."</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-## 🎯 Recent Publications 
+    <!-- Academic Services & Education -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <!-- Education -->
+                <div data-aos="fade-up">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                        <span class="p-2 bg-primary/10 rounded-lg text-primary"><i class="fa-solid fa-user-graduate"></i></span>
+                        Academic Journey
+                    </h3>
+                    <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-300 before:to-transparent">
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-gray-200 group-[.is-active]:bg-primary group-[.is-active]:text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] md:w-[45%] p-4 rounded border border-gray-100 bg-gray-50 shadow-sm transition hover:shadow-md">
+                                <time class="font-mono text-xs font-bold text-primary">2022</time>
+                                <div class="font-bold text-gray-900">Ph.D. in Computer Science Engineering</div>
+                                <div class="text-sm text-gray-500">Sapienza University of Rome</div>
+                            </div>
+                        </div>
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-gray-200 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] md:w-[45%] p-4 rounded border border-gray-100 bg-gray-50 shadow-sm transition hover:shadow-md">
+                                <time class="font-mono text-xs font-bold text-gray-400">2018</time>
+                                <div class="font-bold text-gray-900">Master's in Computer Science Engineering</div>
+                                <div class="text-sm text-gray-500">Tor Vergata University of Rome</div>
+                            </div>
+                        </div>
+                        <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-gray-200 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 transition">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] md:w-[45%] p-4 rounded border border-gray-100 bg-gray-50 shadow-sm transition hover:shadow-md">
+                                <time class="font-mono text-xs font-bold text-gray-400">2015</time>
+                                <div class="font-bold text-gray-900">Bachelor's in Computer Science Engineering</div>
+                                <div class="text-sm text-gray-500">Tor Vergata University of Rome</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<table border="0">
-<tr>
-<td width="50%" valign="top">
+                <!-- Academic Service -->
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                        <span class="p-2 bg-secondary/10 rounded-lg text-secondary"><i class="fa-solid fa-handshake-angle"></i></span>
+                        Scientific Community
+                    </h3>
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                        <h4 class="font-bold text-gray-700 mb-4 uppercase text-xs tracking-widest">Program Committee Member</h4>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-2 text-sm">
+                                <i class="fa-solid fa-chevron-right text-secondary mt-1"></i>
+                                <span>ResGenXAI, 2025</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-sm">
+                                <i class="fa-solid fa-chevron-right text-secondary mt-1"></i>
+                                <span>SecSoft, 2025</span>
+                            </li>
+                        </ul>
 
-### 🛡️ Ethical-AI & Human-Centric
+                        <h4 class="font-bold text-gray-700 mb-4 uppercase text-xs tracking-widest">Journal Reviewer</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Computer Networks</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Computers & Security</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Applied Sciences</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">Sensors</span>
+                            <span class="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-600">IEEE Access</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-*   **[Open-Ethical AI: Advances in Human-Centric NLMs](https://dl.acm.org/doi/10.1145/3703454)**  
-    *ACM Computing Surveys, 2024*  
-    [![Paper](https://img.shields.io/badge/Paper-1D70B8?style=flat-square&logo=open-access&logoColor=white)](https://dl.acm.org/doi/10.1145/3703454)
+    <!-- GitHub Stats Section -->
+    <section id="stats" class="py-24 bg-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">📊 GitHub Analytics</h2>
+                <div class="h-1.5 w-20 bg-primary mx-auto rounded-full mt-4"></div>
+            </div>
+            <div class="flex flex-col items-center gap-12" data-aos="zoom-in">
+                <div class="flex flex-wrap justify-center gap-6">
+                    <img src="https://github-readme-stats.vercel.app/api?username=QwertyJacob&show_icons=true&theme=dracula&hide_border=true&bg_color=00000000&title_color=FF6B6B&icon_color=FF6B6B&text_color=ffffff" alt="GitHub Stats" class="max-w-full">
+                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=QwertyJacob&layout=compact&theme=dracula&hide_border=true&bg_color=00000000&title_color=FF6B6B&icon_color=FF6B6B&text_color=ffffff&hide=html,css,jupyter%20notebook" alt="Top Languages" class="max-w-full">
+                </div>
+                <img src="https://github-readme-streak-stats.herokuapp.com/?user=QwertyJacob&theme=dracula&hide_border=true&background=00000000&ring=FF6B6B&fire=FF6B6B&currStreakLabel=FF6B6B" alt="Streak Stats" class="max-w-full">
+            </div>
+        </div>
+    </section>
 
-*   **[Ethical Treatment of Language Models](https://www.sciencedirect.com/science/article/pii/S0952197626005981)**  
-    *EAAI, 2026*  
-    [![Paper](https://img.shields.io/badge/Paper-1D70B8?style=flat-square&logo=open-access&logoColor=white)](https://www.sciencedirect.com/science/article/pii/S0952197626005981) [![Repo](https://img.shields.io/badge/Repo-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/QwertyJacob/genetica)
+    <!-- Teaching Section -->
+    <section id="teaching" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">🧑‍🏫 Teaching & Mentoring</h2>
+                <div class="h-1.5 w-20 bg-primary mx-auto rounded-full mt-4"></div>
+            </div>
 
-*   **[DeepReGraph: Graph Learning for Gene Regulation](https://f1000research.com/articles/11-518)**  
-    *F1000Research, 2022*  
-    [![Paper](https://img.shields.io/badge/Paper-1D70B8?style=flat-square&logo=open-access&logoColor=white)](https://f1000research.com/articles/11-518) [![Repo](https://img.shields.io/badge/Repo-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/QwertyJacob/DeepReGraph)
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-8" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold mb-6 underline decoration-primary underline-offset-8 decoration-4">Academic Courses</h3>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 card-hover">
+                        <h4 class="font-bold text-lg mb-2">Probability for Computer Scientists</h4>
+                        <p class="text-gray-600 mb-4">Supporting teaching with interactive Google Colab notebooks for students at University of Insubria (2023/2024).</p>
+                        <a href="https://github.com/QwertyJacob/colab_handouts_PSI" target="_blank" class="inline-flex items-center gap-2 text-primary hover:underline font-semibold">
+                            <i class="fa-brands fa-github"></i> Notebook Repository
+                        </a>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 card-hover">
+                        <h4 class="font-bold text-lg mb-2">Advanced Coding Tools</h4>
+                        <p class="text-gray-600 mb-4">Master's degree course in Music and Acoustic Engineering at Politecnico di Milano (2022/2023).</p>
+                    </div>
+                </div>
 
-</td>
-<td width="50%" valign="top">
+                <div data-aos="fade-left">
+                    <h3 class="text-2xl font-bold mb-6 underline decoration-secondary underline-offset-8 decoration-4">Guest Lectures</h3>
+                    <div class="overflow-hidden rounded-xl border border-gray-200 shadow-sm">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-100 text-gray-700 font-bold text-sm uppercase tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-4">Topic</th>
+                                    <th class="px-6 py-4">Venue</th>
+                                    <th class="px-6 py-4">Resources</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 text-sm">
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 font-semibold">Active Inference Intro</td>
+                                    <td class="px-6 py-4">Insubria, 2025</td>
+                                    <td class="px-6 py-4 text-primary flex gap-4">
+                                        <a href="https://www.canva.com/design/DAG4ZGjAg4M/z_UESq1lCMfOoTS402CAYA/view" target="_blank" title="Slides"><i class="fa-solid fa-display text-lg"></i></a>
+                                        <a href="https://docs.google.com/document/d/1kFPLwgz3UQF60vC1MspOsBaorbto7ZDq7yoL3XflLsI/edit" target="_blank" title="Handout"><i class="fa-solid fa-file-lines text-lg"></i></a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 font-semibold">AI & Anthropology</td>
+                                    <td class="px-6 py-4">UTPL, 2024</td>
+                                    <td class="px-6 py-4 text-primary flex gap-4">
+                                        <a href="https://www.canva.com/design/DAGnb0BE-nQ/Ftz1zY-xy0e6j8oFoqixDA/view" target="_blank" title="Slides"><i class="fa-solid fa-display text-lg"></i></a>
+                                        <a href="https://www.youtube.com/watch?v=xPx6QKY4InM" target="_blank" title="Video"><i class="fa-brands fa-youtube text-lg"></i></a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 font-semibold">Inductive Biases</td>
+                                    <td class="px-6 py-4">Federico II, 2024</td>
+                                    <td class="px-6 py-4 text-primary">
+                                        <a href="https://www.canva.com/design/DAGQWFO1zls/h-t85UhVlwthTTNjcLNeYQ/view" target="_blank" title="Slides"><i class="fa-solid fa-display text-lg"></i></a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 font-semibold">AI working principles</td>
+                                    <td class="px-6 py-4">Insubria, 2024</td>
+                                    <td class="px-6 py-4 text-primary">
+                                        <a href="https://www.canva.com/design/DAGUOyGESSE/6j2h1A14A7_3iowuPftK2g/view" target="_blank" title="Slides"><i class="fa-solid fa-display text-lg"></i></a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 font-semibold">ML meets IoT</td>
+                                    <td class="px-6 py-4">Insubria, 2023</td>
+                                    <td class="px-6 py-4 text-primary">
+                                        <a href="https://www.canva.com/design/DAGJDK1WUKE/W_Lg-aG-pHOrssSHnEi6Bg/view" target="_blank" title="Slides"><i class="fa-solid fa-display text-lg"></i></a>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 font-semibold">AI and Cybersecurity</td>
+                                    <td class="px-6 py-4">Insubria, 2023</td>
+                                    <td class="px-6 py-4 text-primary">
+                                        <a href="https://www.canva.com/design/DAF0D9SRgL8/bZ-BtJuqrG27mzxosv7hhg/view" target="_blank" title="Slides"><i class="fa-solid fa-display text-lg"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-### ⚙️ Neural Reasoning & Security
+    <!-- Contact Section -->
+    <footer id="contact" class="bg-dark text-white pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">💬 Let's Connect</h2>
+                <p class="text-gray-400 max-w-xl mx-auto text-lg">Open for research collaborations, PhD mentoring, and deep learning discussions.</p>
+                <div class="h-1.5 w-20 bg-primary mx-auto rounded-full mt-6"></div>
+            </div>
 
-*   **[HERO: High-dim traffic to Zero-Day](https://www.sciencedirect.com/science/article/pii/S1389128625002324)**  
-    *Computer Networks, 2025*  
-    [![Paper](https://img.shields.io/badge/Paper-1D70B8?style=flat-square&logo=open-access&logoColor=white)](https://www.sciencedirect.com/science/article/pii/S1389128625002324) [![Repo](https://img.shields.io/badge/Repo-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/QwertyJacob/HERO)
+            <div class="flex flex-col items-center gap-10 mb-20" data-aos="fade-up">
+                <div class="flex gap-8">
+                    <a href="mailto:jf.cevallosmoreno@uninsubria.it" class="w-14 h-14 bg-primary rounded-full flex items-center justify-center text-2xl hover:scale-110 hover:rotate-6 transition shadow-lg shadow-primary/20"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/jesuscevallos/" target="_blank" class="w-14 h-14 bg-[#0A66C2] rounded-full flex items-center justify-center text-2xl hover:scale-110 hover:-rotate-6 transition shadow-lg shadow-blue-600/20"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://x.com/JesusCevallos9" target="_blank" class="w-14 h-14 bg-black rounded-full flex items-center justify-center text-2xl hover:scale-110 hover:rotate-6 transition border border-white/20 shadow-lg shadow-white/5"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+                <div class="text-center">
+                    <p class="text-xl font-bold mb-2">🏢 Academic Office</p>
+                    <p class="text-gray-400">DiSTA, University of Insubria, Varese, Italy</p>
+                </div>
+            </div>
 
-*   **[ASAP: Automatic Synthesis of Attack Prototypes](https://www.sciencedirect.com/science/article/pii/S1389128624006601)**  
-    *Computer Networks, 2024*  
-    [![Paper](https://img.shields.io/badge/Paper-1D70B8?style=flat-square&logo=open-access&logoColor=white)](https://www.sciencedirect.com/science/article/pii/S1389128624006601) [![Repo](https://img.shields.io/badge/Repo-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/DISTA-IoT/smartville)
+            <div class="border-t border-white/10 pt-12 text-center">
+                <p class="italic text-gray-500 mb-6 font-mono text-sm max-w-2xl mx-auto">"Creativity, communication and commitment for the team. That's leadership."</p>
+                <div class="flex flex-col items-center gap-6">
+                    <img src="https://komarev.com/ghpvc/?username=QwertyJacob&color=FF6B6B&style=for-the-badge&label=VISITORS" alt="Visitors" class="h-8">
+                    <p class="text-xs text-gray-600 uppercase tracking-widest font-semibold">&copy; 2025 Jesús F. Cevallos-Moreno. Built with Tailwind CSS & ❤️</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-*   **[NERO: Neural Reasoning for zeRO-day in IoT](https://www.sciencedirect.com/science/article/pii/S0167404824002001)**  
-    *Computers & Security, 2024*  
-    [![Paper](https://img.shields.io/badge/Paper-1D70B8?style=flat-square&logo=open-access&logoColor=white)](https://www.sciencedirect.com/science/article/pii/S0167404824002001) [![Repo](https://img.shields.io/badge/Repo-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/QwertyJacob/NERO)
-
-</td>
-</tr>
-</table>
-
-<details>
-<summary><b>See More Publications</b></summary>
-<br>
-
-*   **[ACID: Active Inference for Active Cyber-Defence](https://www.techrxiv.org/users/925680/articles/1350771-acid-beta-testing-active-inference-for-active-cyber-defence)** (2025)
-*   **[Deep RL for Intrusion Detection in IoT](https://www.sciencedirect.com/science/article/pii/S1389128623004619)** (2023)
-*   **[Deep RL for vCDN SFC Deployment](https://www.mdpi.com/1999-5903/13/11/278)** (2021)
-*   **[HR-specific NLP for Skills Classification](https://qwertyjacob.github.io)** (2022)
-
-</details>
-
----
-
-## 📊 GitHub Analytics
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=QwertyJacob&show_icons=true&theme=dracula&hide_border=true&bg_color=00000000&title_color=FF6B6B&icon_color=FF6B6B&text_color=ffffff" height="170" alt="GitHub Stats" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=QwertyJacob&layout=compact&theme=dracula&hide_border=true&bg_color=00000000&title_color=FF6B6B&icon_color=FF6B6B&text_color=ffffff&hide=html,css,jupyter%20notebook" height="170" alt="Top Languages" />
-  <br>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=QwertyJacob&theme=dracula&hide_border=true&background=00000000&ring=FF6B6B&fire=FF6B6B&currStreakLabel=FF6B6B" height="170" alt="Streak Stats" />
-</div>
-
----
-
-## 🧑‍🏫 Teaching & Mentoring
-
-<details open>
-<summary><b>Academic Courses</b></summary>
-<br>
-
-*   **[Probability for Computer Scientists](https://github.com/QwertyJacob/colab_handouts_PSI)** @ *Insubria University*  
-    A collection of Google Colab notebooks for teaching Probability and Statistics.  
-    [![Repo](https://img.shields.io/badge/Resources-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/QwertyJacob/colab_handouts_PSI)
-    
-*   **[Active Inference Made Easy](https://github.com/QwertyJacob/colab_handouts_PSI/blob/main/BONUSX_ActiveInference.ipynb)**  
-    A full journey in PyTorch and Algebra for Active Inference.  
-    [![Open In Colab](https://img.shields.io/badge/Colab-F9AB00?style=flat-square&logo=google-colab&logoColor=white)](https://colab.research.google.com/github/QwertyJacob/colab_handouts_PSI/blob/main/BONUSX_ActiveInference.ipynb)
-
-</details>
-
-<br>
-
-<details>
-<summary><b>Guest Lectures & Talks</b></summary>
-<br>
-
-| Topic | Venue & Year | Materials |
-| :--- | :--- | :--- |
-| **Active Inference Intro** | Insubria University, 2025 | [![Slides](https://img.shields.io/badge/Slides-00C7B7?style=flat-square&logo=canva&logoColor=white)](https://www.canva.com/design/DAG4ZGjAg4M/z_UESq1lCMfOoTS402CAYA/view) [![Handout](https://img.shields.io/badge/Doc-FF6B6B?style=flat-square&logo=google-docs&logoColor=white)](https://docs.google.com/document/d/1kFPLwgz3UQF60vC1MspOsBaorbto7ZDq7yoL3XflLsI/edit) |
-| **AI & Anthropology** | UTPL (Ecuador), 2024 | [![Slides](https://img.shields.io/badge/Slides-00C7B7?style=flat-square&logo=canva&logoColor=white)](https://www.canva.com/design/DAGnb0BE-nQ/Ftz1zY-xy0e6j8oFoqixDA/view) [![YouTube](https://img.shields.io/badge/Video-FF0000?style=flat-square&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=xPx6QKY4InM) |
-| **Inductive Biases** | Federico II Univ, 2024 | [![Slides](https://img.shields.io/badge/Slides-00C7B7?style=flat-square&logo=canva&logoColor=white)](https://www.canva.com/design/DAGQWFO1zls/h-t85UhVlwthTTNjcLNeYQ/view) |
-| **AI working principles** | Insubria University, 2024 | [![Slides](https://img.shields.io/badge/Slides-00C7B7?style=flat-square&logo=canva&logoColor=white)](https://www.canva.com/design/DAGUOyGESSE/6j2h1A14A7_3iowuPftK2g/view) |
-
-</details>
-
-
----
-
-## 💬 Let's Connect
-
-<div align="center">
-  <p><i>I'm always open to discussing research collaborations, interesting AI problems, or just chatting about the latest developments in deep learning and cybersecurity.</i></p>
-
-  <a href="mailto:jf.cevallosmoreno@uninsubria.it"><img src="https://img.shields.io/badge/Email-jf.cevallosmoreno@uninsubria.it-FF6B6B?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-  <a href="https://www.linkedin.com/in/jesuscevallos/"><img src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-  
-  <br><br>
-  
-  🏢 **Office:** Department of Theoretical and Applied Science (DiSTA), University of Insubria, Varese, Italy
-</div>
-
----
-
-<div align="center">
-  <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=dracula&quote=Creativity,%20communication%20and%20commitment%20for%20the%20team.%20That's%20leadership." alt="Quote" />
-  <br>
-  <img src="https://komarev.com/ghpvc/?username=QwertyJacob&color=FF6B6B&style=for-the-badge&label=PROFILE+VIEWS" />
-</div>
+    <!-- AOS Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 120,
+            easing: 'ease-out-cubic'
+        });
+    </script>
+</body>
+</html>
