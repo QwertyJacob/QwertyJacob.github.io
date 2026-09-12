@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesús F. Cevallos - Researcher & Lecturer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #ec4899;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .focus-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .focus-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .focus-topics {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .focus-topic {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .section h2 {
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            color: var(--secondary);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pub-card {
+            background: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .pub-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .pub-card h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .pub-card .pub-meta {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .pub-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .pub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 1rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .pub-link:hover {
+            background: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .pub-link.repo {
+            background: #181717;
+        }
+
+        .category-section {
+            margin-top: 3rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        .teaching-item,
+        .education-item {
+            background: var(--light);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .teaching-item h4,
+        .education-item h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .teaching-item p,
+        .education-item p {
+            color: var(--gray);
+            margin: 0.25rem 0;
+        }
+
+        .contact-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 8px;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .contact-item a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+        .interests-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .interest-tag {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .services-box {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .publications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .focus-topics {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <h1>👋 Jesús F. Cevallos</h1>
+        <p>🧠 Postdoc Researcher & Lecturer @ University of Insubria</p>
+
+        <div class="social-links">
+            <a href="https://orcid.org/0000-0003-2752-4616" class="social-btn" target="_blank">
+                <i class="fab fa-orcid"></i> ORCID
+            </a>
+            <a href="https://www.linkedin.com/in/jesuscevallos/" class="social-btn" target="_blank">
+                <i class="fab fa-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://x.com/JesusCevallos9" class="social-btn" target="_blank">
+                <i class="fab fa-twitter"></i> Twitter
+            </a>
+            <a href="https://scholar.google.com/citations?user=26o39YMAAAAJ&hl=en" class="social-btn" target="_blank">
+                <i class="fas fa-graduation-cap"></i> Google Scholar
+            </a>
+            <a href="https://github.com/QwertyJacob" class="social-btn" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Research Focus -->
+        <div class="focus-section">
+            <h2>🔬 Research Focus</h2>
+            <div class="focus-topics">
+                <div class="focus-topic">Algorithmic Reasoning Inductive Biases for Cybersecurity</div>
+                <div class="focus-topic">Human-centred Language Models</div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="section">
+            <h2>Profile</h2>
+            <p>Jesús F. Cevallos M. received his Ph.D. in Computer Science Engineering from Sapienza University (Rome)
+                in 2022. He now holds a postdoctoral researcher position at the University of Insubria (Varese, Italy).
+            </p>
+            <p style="margin-top: 1rem;">His main research interests are industrial/ethical applications of Deep
+                Learning with a special focus on Natural Language Processing and Neural Algorithmic Reasoning.</p>
+
+
+
+            <h3>Research Group</h3>
+            <div class="services-box">
+                <p><strong>Advisor:</strong> Prof. <a href="http://www.dista.uninsubria.it/~alessandra.rizzardi/"
+                        target="_blank">Alessandra Rizzardi</a></p>
+                <p><strong>Board:</strong> Prof. <a href="http://www.dicom.uninsubria.it/~sabrina.sicari/"
+                        target="_blank">Sabrina Sicari</a>, Prof. <a
+                        href="http://www.dicom.uninsubria.it/~alberto.coenporisini/" target="_blank">Alberto
+                        Coen-Porisini</a></p>
+            </div>
+
+            <h3>Academic Services</h3>
+            <div class="services-box">
+                <p><strong>Program Committee Member (TPC):</strong></p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>International Conference on Responsible, Generative, and Explainable AI (ResGenXAI), 2025</li>
+                    <li>7th International Workshop on Cyber-Security in Software-defined and Virtualized Infrastructures
+                        (SecSoft 25), 2025</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Reviewer for Conferences:</strong></p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>International Joint Conference on Artificial Intelligence (IJCAI-26), 2026</li>
+                    <li>International Joint Conference on Artificial Intelligence (IJCAI-25), 2025</li>
+                    <li>International Conference on Responsible, Generative, and Explainable AI (ResGenXAI), 2025</li>
+                    <li>7th International Workshop on Cyber-Security in Software-defined and Virtualized Infrastructures
+                        (SecSoft 25), 2025</li>
+                    <li>International Conference on Wireless and Mobile Computing, Networking and Communications
+                        (WiMob'20), 2024</li>
+
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Reviewer for Journals:</strong></p>
+                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                    <li>Computer Networks</li>
+                    <li>Computers & Security</li>
+                    <li>Pervasive and Mobile Computing</li>
+                    <li>Transactions on Emerging Telecommunications Technologies</li>
+                    <li>Internet Technology Letters</li>
+                    <li>Journal of Information Assurance and Security</li>
+                    <li>IoT, Electronics, Symmetry, Eng, Applied Sciences, Sensors, Information</li>
+                    <li>International Journal of Computer Theory and Engineering</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Recent Publications -->
+        <div class="section">
+            <h2>🎯 Recent Publications</h2>
+
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-icon">🛡️</span>
+                    <h3 class="category-title">Ethical AI</h3>
+                </div>
+
+                <div class="pub-card">
+                    <h4>Open-Ethical AI: Advances in Human-Centric NLMs</h4>
+                    <p class="pub-meta">ACM Computing Surveys, Vol 57(4), 2024</p>
+                    <p class="pub-meta">Sabrina Sicari, Jesus Fernando Cevallos Moreno, Alessandra Rizzardi, Alberto
+                        Coen-Porisini</p>
+                    <p>Survey on open-source ethical AI developments</p>
+                    <div class="pub-links">
+                        <a href="https://dl.acm.org/doi/10.1145/3703454" class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>Ethical Treatment of Language Models Against Harmful Inference-Time Interventions</h4>
+                    <p class="pub-meta">Engineering Applications of Artificial Intelligence (Elsevier), Volume 172, 2026
+                    </p>
+                    <p class="pub-meta">Jesus Fernando Cevallos Moreno, Alessandra Rizzardi, Sabrina Sicari, Alberto
+                        Coen-Porisini</p>
+                    <p>Can LLMs resist harmful representation engineering?</p>
+                    <div class="pub-links">
+                        <a href="https://www.sciencedirect.com/science/article/pii/S0952197626005981" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/QwertyJacob/genetica" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-icon">⚙️</span>
+                    <h3 class="category-title">Neural Algorithmic Reasoning for Cybersecurity</h3>
+                </div>
+
+                <div class="pub-card">
+                    <h4>SmartVille: A Framework for Realistic Deep Learning-Based Online Network Intrusion Detection</h4>
+                    <p class="pub-meta">Journal of Network and Systems Management, 2026</p>
+                    <p class="pub-meta">Jesus Fernando Cevallos Moreno, Alessandra Rizzardi, Sabrina Sicari, Alberto
+                        Coen-Porisini</p>
+                    <div class="pub-links">
+                        <a href="https://link.springer.com/article/10.1007/s10922-026-10097-8" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/DISTA-IoT/insubria-smartville" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>TIGER: An Open-Source Cyber-Threat Intelligence Game Environment for Reinforcement Learning</h4>
+                    <p class="pub-meta">IEEE Transactions on Network and Service Management, 2026</p>
+                    <p class="pub-meta">Jesus Fernando Cevallos Moreno, Alessandra Rizzardi, Sabrina Sicari, Alberto
+                        Coen-Porisini</p>
+                    <div class="pub-links">
+                        <a href="https://ieeexplore.ieee.org/document/11683850/" class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/DISTA-IoT/tiger" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>SereWay: Toward SEcurity and REliability Benchmarking for the RailWAY IIoT</h4>
+                    <p class="pub-meta">Journal of Network and Systems Management, 2026</p>
+                    <div class="pub-links">
+                        <a href="https://link.springer.com/article/10.1007/s10922-025-10026-1" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>Open-FARI: An Open-Source Testbed for Federated Anomaly Detection in the Railway IIoT</h4>
+                    <p class="pub-meta">IWCMC, 2025</p>
+                    <div class="pub-links">
+                        <a href="https://ieeexplore.ieee.org/document/11059481/" class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>ASAP: Automatic Synthesis of Attack Prototypes, an online-learning, end-to-end approach</h4>
+                    <p class="pub-meta">Computer Networks (Elsevier), 2024</p>
+                    <p class="pub-meta">Jesus Fernando Cevallos Moreno, Alessandra Rizzardi, Sabrina Sicari, Alberto
+                        Coen-Porisini</p>
+                    <p>End-to-end online-learning approach using the relational-bottleneck Inductive Bias for Prototype
+                        attack synthesis from raw network traffic.</p>
+                    <div class="pub-links">
+                        <a href="https://www.sciencedirect.com/science/article/pii/S1389128624006601" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/DISTA-IoT/smartville" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>NERO: NEural algorithmic reasoning for zeRO-day attack detection in the IoT: A hybrid approach
+                    </h4>
+                    <p class="pub-meta">Computers & Security (Elsevier), 2024</p>
+                    <p class="pub-meta">Jesus Fernando Cevallos Moreno, Alessandra Rizzardi, Sabrina Sicari, Alberto
+                        Coen-Porisini</p>
+                    <p>Extreme value theory, the algorithmic way!</p>
+                    <div class="pub-links">
+                        <a href="https://www.sciencedirect.com/science/article/pii/S0167404824002001" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/QwertyJacob/NERO" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>Deep Reinforcement Learning for Intrusion Detection in Internet of Things: Best Practices,
+                        Lessons Learnt, and Open Challenges</h4>
+                    <p class="pub-meta">Computer Networks (Elsevier), 2023</p>
+                    <p class="pub-meta">Jesus Fernando Cevallos Moreno, Alessandra Rizzardi, Sabrina Sicari, Alberto
+                        Coen-Porisini</p>
+                    <div class="pub-links">
+                        <a href="https://www.sciencedirect.com/science/article/pii/S1389128623004619" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>HERO: From High-dimensional network traffic to zERO-Day attack detection</h4>
+                    <p class="pub-meta">Computer Networks, 2025</p>
+                    <p>Full firepower of the Neural Algorithmic Reasoning paradigm for zero-day attack detection!</p>
+                    <div class="pub-links">
+                        <a href="https://www.sciencedirect.com/science/article/pii/S1389128625002324" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/QwertyJacob/HERO" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-icon">🧪</span>
+                    <h3 class="category-title">Inductive Biases for Cybersecurity</h3>
+                </div>
+
+                <div class="pub-card">
+                    <h4>ACID: beta-testing ACtive Inference for active cyber-Defence</h4>
+                    <p class="pub-meta">TechRXiv Preprint, 2025</p>
+                    <p>A powerful optimal-control framework needs a powerful task to be tested against!</p>
+                    <div class="pub-links">
+                        <a href="https://www.techrxiv.org/users/925680/articles/1350771-acid-beta-testing-active-inference-for-active-cyber-defence"
+                            class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/DISTA-IoT/smartville" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>ASAP: Automatic Synthesis of Attack Prototypes</h4>
+                    <p class="pub-meta">Computer Networks (Elsevier), 2024</p>
+                    <p>End-to-end online-learning approach using the relational-bottleneck Inductive Bias for Prototype
+                        attack synthesis from raw network traffic.</p>
+                    <div class="pub-links">
+                        <a href="https://www.sciencedirect.com/science/article/pii/S1389128624006601" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/DISTA-IoT/smartville" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>Deep Reinforcement Learning for Intrusion Detection in Internet of Things: Best Practices,
+                        Lessons Learnt, and Open Challenges</h4>
+                    <p class="pub-meta">Computer Networks (Elsevier), 2023</p>
+                    <div class="pub-links">
+                        <a href="#" class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <div class="category-header">
+                    <span class="category-icon">🚀</span>
+                    <h3 class="category-title">Collaborations</h3>
+                </div>
+
+                <div class="pub-card">
+                    <h4>IoT-driven blockchain to manage the healthcare supply chain and protect medical records</h4>
+                    <p class="pub-meta">Future Generation Computer Systems (Elsevier), 2024</p>
+                    <p class="pub-meta">Alessandra Rizzardi, Sabrina Sicari, Jesus F. Cevallos M., Alberto
+                        Coen-Porisini</p>
+                    <div class="pub-links">
+                        <a href="https://www.sciencedirect.com/science/article/pii/S0167739X24003996" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>RailRED: A Node-RED-Based Framework for Modeling Train Control Management Systems</h4>
+                    <p class="pub-meta">WiMob, 2024</p>
+                    <p class="pub-meta">Alessandra Rizzardi, Raffaele Della Corte, Jesus Fernando Cevallos Moreno,
+                        Vittorio Orbinato, Simona De Vivo, Sabrina Sicari, Domenico Cotroneo, Alberto Coen-Porisini</p>
+                    <div class="pub-links">
+                        <a href="https://ieeexplore.ieee.org/document/10770345/" class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>Learning at the nano-scale: how to dynamically protect data in nano-network transmissions</h4>
+                    <p class="pub-meta">Annals of Telecommunications, 2026</p>
+                    <p class="pub-meta">Alessandra Rizzardi, Sabrina Sicari, Luigi Alfredo Grieco, Giuseppe Piro,
+                        Jesus F. Cevallos-Moreno, et al.</p>
+                    <div class="pub-links">
+                        <a href="https://link.springer.com/article/10.1007/s12243-026-01203-7" class="pub-link"
+                            target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>Deep RL for vCDN Service Function Chain Deployment</h4>
+                    <p class="pub-meta">Future Internet (MDPI), 2021</p>
+                    <p>Online optimization for live-streaming CDNs using dueling DDQN.</p>
+                    <p class="pub-meta">Cevallos M. J. F., R. Sattler, R. P. Caulier C., L. R. Celsi, A. Sánchez
+                        Rodríguez, and M. Mecella</p>
+                    <div class="pub-links">
+                        <a href="https://www.mdpi.com/1999-5903/13/11/278" class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/QwertyJacob/e2d4qn_vcdn_sfc_deployment" class="pub-link repo"
+                            target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>DeepReGraph: Heterogeneous Graph Learning for Gene Regulation</h4>
+                    <p class="pub-meta">F1000Research, 2022</p>
+                    <p>Deep learning approach for understanding embryonic regulatory mechanisms through graph
+                        representation learning.</p>
+                    <p class="pub-meta">Cevallos. M., J. F., P. Zarrineh, A. Sánchez., and M. Mecella</p>
+                    <div class="pub-links">
+                        <a href="https://f1000research.com/articles/11-518" class="pub-link" target="_blank">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
+                        <a href="https://github.com/QwertyJacob/DeepReGraph" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>SERENA-IIoT: Secure and Reliable IoT Systems</h4>
+                    <p class="pub-meta">Collaborative Research Project</p>
+                    <p>Collaborative research on secure and reliable IoT systems.</p>
+                    <div class="pub-links">
+                        <a href="http://serenaiiot.dista.uninsubria.it" class="pub-link" target="_blank">
+                            <i class="fas fa-globe"></i> Project Website
+                        </a>
+                        <a href="https://github.com/DIETI-DISTA-IoT/SereBench" class="pub-link repo" target="_blank">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pub-card">
+                    <h4>HR-specific NLP for the Homogeneous Classification of Declared and Inferred Skills</h4>
+                    <p class="pub-meta">Applied Artificial Intelligence, 2022</p>
+                    <p class="pub-meta">L.R. Celsi, J. F. Cevallos M., F. Kieffer, V. Paduano</p>
+                </div>
+            </div>
+
+            <div class="category-section">
+                <div class="pub-card">
+                    <h4>Deep Learning Applications over Heterogeneous Networks: from Multimedia to Genes</h4>
+                    <p class="pub-meta">Ph.D. Thesis Dissertation, Sapienza University of Rome, 2022</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <h2>🎓 Education</h2>
+            <div class="education-item">
+                <h4>Ph.D. in Computer Science Engineering</h4>
+                <p>Sapienza University of Rome, 2022</p>
+            </div>
+            <div class="education-item">
+                <h4>Master's in Computer Science Engineering</h4>
+                <p>Tor Vergata University of Rome, 2018</p>
+            </div>
+            <div class="education-item">
+                <h4>Bachelor's in Computer Science Engineering</h4>
+                <p>Tor Vergata University of Rome, 2015</p>
+            </div>
+        </div>
+
+        <!-- Teaching -->
+        <div class="section">
+            <h2>🧑‍🏫 Teaching Experience</h2>
+
+            <h3>Lecturer</h3>
+
+            <div class="teaching-item">
+                <h4>Probability and Statistics for Computer Science</h4>
+                <p>Insubria University, Varese, 2023/2024</p>
+                <p>Bachelor's degree in Computer Science</p>
+                <div class="pub-links" style="margin-top: 1rem;">
+                    <a href="https://github.com/QwertyJacob/colab_handouts_PSI" class="pub-link repo" target="_blank">
+                        <i class="fab fa-github"></i> Course Materials
+                    </a>
+                </div>
+            </div>
+
+            <div class="teaching-item">
+                <h4>Advanced Coding Tools and Methodologies</h4>
+                <p>Politecnico di Milano, 2022/2023</p>
+                <p>Master's degree in Music and Acoustic Engineering</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">📚 Guest Lectures</h3>
+
+            <div class="teaching-item">
+                <h4>AI and Cyber-security</h4>
+                <p>Insubria University (Italy), 2023</p>
+                <p>Bachelor's degree course on Legal Computer Science</p>
+                <div class="pub-links" style="margin-top: 1rem;">
+                    <a href="https://www.canva.com/design/DAF0D9SRgL8/bZ-BtJuqrG27mzxosv7hhg/view" class="pub-link"
+                        target="_blank">
+                        <i class="fas fa-presentation"></i> Slides
+                    </a>
+                </div>
+            </div>
+
+            <div class="teaching-item">
+                <h4>AI Working Principles: Advantages and Disadvantages</h4>
+                <p>Insubria University (Italy), 2024</p>
+                <p>Bachelor's degree course on Legal Computer Science</p>
+                <div class="pub-links" style="margin-top: 1rem;">
+                    <a href="https://www.canva.com/design/DAGUOyGESSE/6j2h1A14A7_3iowuPftK2g/view" class="pub-link"
+                        target="_blank">
+                        <i class="fas fa-presentation"></i> Slides
+                    </a>
+                </div>
+            </div>
+
+            <div class="teaching-item">
+                <h4>An Extremely Gentle Introduction to Active Inference</h4>
+                <p>Insubria University (Italy), 2025</p>
+                <p>Bachelor's degree course on Legal Computer Science</p>
+                <div class="pub-links" style="margin-top: 1rem;">
+                    <a href="https://www.canva.com/design/DAG4ZGjAg4M/z_UESq1lCMfOoTS402CAYA/view" class="pub-link"
+                        target="_blank">
+                        <i class="fas fa-presentation"></i> Slides
+                    </a>
+                    <a href="https://docs.google.com/document/d/1kFPLwgz3UQF60vC1MspOsBaorbto7ZDq7yoL3XflLsI/edit"
+                        class="pub-link" target="_blank">
+                        <i class="fas fa-file-alt"></i> Handout
+                    </a>
+                </div>
+            </div>
+
+            <div class="teaching-item">
+                <h4>Inductive Biases for Meta-Learning</h4>
+                <p>Federico II University (Italy), 2024 - A Research Retrospective</p>
+                <div class="pub-links" style="margin-top: 1rem;">
+                    <a href="https://www.canva.com/design/DAGQWFO1zls/h-t85UhVlwthTTNjcLNeYQ/view" class="pub-link"
+                        target="_blank">
+                        <i class="fas fa-presentation"></i> Slides
+                    </a>
+                </div>
+            </div>
+
+            <div class="teaching-item">
+                <h4>Machine Learning Meets the Internet of Things</h4>
+                <p>Insubria University (Italy), 2023</p>
+                <p>Guest Lecture on the Innovative IoT PhD course</p>
+                <div class="pub-links" style="margin-top: 1rem;">
+                    <a href="https://www.canva.com/design/DAGJDK1WUKE/W_Lg-aG-pHOrssSHnEi6Bg/view" class="pub-link"
+                        target="_blank">
+                        <i class="fas fa-presentation"></i> Slides
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Research Interests -->
+        <div class="section">
+            <h2>🔬 Research Interests</h2>
+            <h3>AI-based Cyber-Security Applications for the IoT</h3>
+            <div class="interests-list">
+                <div class="interest-tag">Deep Learning-based Cyber-security for the IoT</div>
+                <div class="interest-tag">Neural Algorithmic Reasoning</div>
+                <div class="interest-tag">Ethical AI</div>
+                <div class="interest-tag">Deep Reinforcement Learning</div>
+                <div class="interest-tag">Graph Representation Learning</div>
+            </div>
+        </div>
+
+        <!-- Projects -->
+        <div class="section">
+            <h2>🚀 Projects</h2>
+            <div class="pub-card" style="border-left-color: var(--accent);">
+                <h4>SERENA-IIoT: Secure and Reliable IoT Systems</h4>
+                <p>Collaborative research on secure and reliable IoT systems.</p>
+                <div style="margin: 1rem 0;">
+                    <a href="http://serenaiiot.dista.uninsubria.it" target="_blank">
+                        <img src="public/images/project-serenaiiot.png" alt="SERENA-IIoT Project"
+                            style="max-width: 100%; border-radius: 8px;">
+                    </a>
+                </div>
+                <div class="pub-links">
+                    <a href="http://serenaiiot.dista.uninsubria.it" class="pub-link" target="_blank">
+                        <i class="fas fa-globe"></i> Project Website
+                    </a>
+                    <a href="https://github.com/DIETI-DISTA-IoT/SereBench" class="pub-link repo" target="_blank">
+                        <i class="fab fa-github"></i> Repository
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        <h3>Bibliometric Indicators</h3>
+            <div class="services-box">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div style="text-align: center; padding: 1rem; background: white; border-radius: 8px;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary);">100</div>
+                        <div style="color: var(--gray); margin-top: 0.5rem;">Citations (Google Scholar)</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: white; border-radius: 8px;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary);">6</div>
+                        <div style="color: var(--gray); margin-top: 0.5rem;">H-index (Google Scholar)</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: white; border-radius: 8px;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--secondary);">100</div>
+                        <div style="color: var(--gray); margin-top: 0.5rem;">Citations (Scopus)</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: white; border-radius: 8px;">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--secondary);">5</div>
+                        <div style="color: var(--gray); margin-top: 0.5rem;">H-index (Scopus)</div>
+                    </div>
+                </div>
+            </div>
+            -->
+        <!-- Contact -->
+        <div class="section">
+            <h2>💬 Contact</h2>
+            <p>I'm always open to discussing research collaborations, interesting AI problems, or just chatting about
+                the latest developments in deep learning and cybersecurity.</p>
+
+            <div class="contact-box">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:jf.cevallosmoreno@uninsubria.it">jf.cevallosmoreno@uninsubria.it</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-building"></i>
+                    <div>
+                        <strong>University of Insubria</strong><br>
+                        <em>Department of Theoretical and Applied Science (DiSTA)</em><br>
+                        Padiglione Rossi, Via Ottorino Rossi 9<br>
+                        21100 Varese (VA), Italy
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/jesuscevallos/" target="_blank">LinkedIn Profile</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/QwertyJacob" target="_blank">GitHub Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p><em>"Creativity, communication and commitment for the team. That's leadership."</em></p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">© 2025 Jesús F. Cevallos - University of Insubria</p>
+    </div>
+</body>
+
+</html>
