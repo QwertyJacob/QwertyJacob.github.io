@@ -1,3 +1,6 @@
 [submodule "accademical_cv_latex"]
 	path = accademical_cv_latex
 	url = https://github.com/QwertyJacob/accademical_cv_latex.git
+[submodule "QwertyJacob"]
+	path = QwertyJacob
+	url = https://github.com/QwertyJacob/QwertyJacob.git
