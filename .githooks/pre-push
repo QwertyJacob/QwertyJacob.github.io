@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Git pre-push hook to ensure remote DiSTA server is synced when pushing
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+DEPLOY_SCRIPT="${REPO_ROOT}/scripts/deploy_dista.sh"
+
+if [[ ! -x "${DEPLOY_SCRIPT}" ]]; then
+    exit 0
+fi
+
+echo "==========================================================="
+echo " [Auto-Deploy] Pre-push check: syncing DiSTA academic site..."
+echo "==========================================================="
+"${DEPLOY_SCRIPT}"

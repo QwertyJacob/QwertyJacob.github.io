@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Git post-commit hook to automatically deploy changes to DiSTA server
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+DEPLOY_SCRIPT="${REPO_ROOT}/scripts/deploy_dista.sh"
+
+if [[ ! -x "${DEPLOY_SCRIPT}" ]]; then
+    exit 0
+fi
+
+# Check if dista files were modified in the latest commit
+CHANGED_FILES=$(git diff-tree -r --name-only --no-commit-id HEAD)
+
+if echo "${CHANGED_FILES}" | grep -qE '^dista_academic_site\.html$|^Jesus_Cevallos_CV\.pdf$|^profile\.jpeg$|^public/'; then
+    echo "==========================================================="
+    echo " [Auto-Deploy] DiSTA academic files changed in this commit."
+    echo " Triggering auto-deployment to 193.206.183.130..."
+    echo "==========================================================="
+    "${DEPLOY_SCRIPT}"
+fi
