@@ -33,10 +33,16 @@
         .guide-download:hover { background: #fff1f1; }
         .topic { display: flex; align-items: flex-start; gap: 12px; padding: 16px; margin: 0; border: 1px solid #d1d5db; border-radius: 10px; cursor: pointer; }
         .topic:has(input:checked) { background: #fff1f1; border-color: #b93838; }
+        .topic:has(input:disabled) { opacity: .65; cursor: not-allowed; }
+        .topic-availability { color: #b93838; font-weight: 600; }
         .topic input { width: 20px; height: 20px; padding: 0; margin: 3px 0 0; flex-shrink: 0; accent-color: #b93838; }
         .topic strong { display: block; }
         .topic .hint { display: block; font-weight: 400; margin-top: 4px; }
-        button { border: 0; border-radius: 999px; padding: 14px 24px; font: inherit; font-weight: 600; background: #e5e7eb; color: #4b5563; cursor: not-allowed; }
+        button { border: 0; border-radius: 999px; padding: 14px 24px; font: inherit; font-weight: 600; background: #e5e7eb; color: #4b5563; cursor: pointer; }
+        button:not(:disabled) { background: #b93838; color: white; }
+        button:disabled { cursor: not-allowed; opacity: .7; }
+        .notice[data-state="success"] { background: #ecfdf5; border-color: #6ee7b7; }
+        .honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
         footer { margin: 28px 0; font-size: .875rem; color: #4b5563; }
         @media (max-width: 540px) { .grid { grid-template-columns: 1fr; gap: 0; } form { padding: 24px 20px; } main { margin-top: 32px; padding: 0 16px; } }
     </style>
@@ -51,35 +57,35 @@
     <main>
         <p class="eyebrow">Thesis supervision</p>
         <h1>Apply for a thesis</h1>
-        <p class="intro">Interested in working on your thesis with Jesús F. Cevallos-Moreno? This form will collect your contact details and the topics you are interested in.</p>
-        <aside class="notice" id="form-status" aria-label="Form status">
-            <strong>Form coming soon</strong>
-            <p>This is a preview. Submission is not available yet, and any details you enter are neither sent nor saved.</p>
+        <p class="intro">Interested in working on your thesis with Jesús F. Cevallos-Moreno? Use this form to send your contact details and the topics you are interested in.</p>
+        <aside class="notice" id="form-status" role="status" aria-live="polite" aria-atomic="true" tabindex="-1">
+            <strong>Applications for Bachelor’s theses</strong>
+            <p>Your details will be sent privately to the supervisor. Select at least one topic. You can send one application per email every 24 hours.</p>
         </aside>
-        <!-- Static preview only. Keep submission disabled until the backend is connected. -->
-        <form aria-label="Thesis application" aria-describedby="form-status" onsubmit="return false;">
+        <noscript><p>Enable JavaScript to submit your application.</p></noscript>
+        <form id="thesis-application" aria-label="Thesis application" aria-describedby="form-status">
             <div class="grid">
                 <div class="field">
                     <label for="first-name">First name</label>
-                    <input id="first-name" type="text" autocomplete="given-name">
+                    <input id="first-name" required maxlength="80" type="text" autocomplete="given-name">
                 </div>
                 <div class="field">
                     <label for="last-name">Last name</label>
-                    <input id="last-name" type="text" autocomplete="family-name">
+                    <input id="last-name" required maxlength="80" type="text" autocomplete="family-name">
                 </div>
             </div>
             <div class="field">
                 <label for="email">University email</label>
-                <input id="email" type="email" autocomplete="email">
+                <input id="email" required maxlength="254" type="email" autocomplete="email">
             </div>
             <div class="grid">
                 <div class="field">
                     <label for="degree-program">Degree programme</label>
-                    <input id="degree-program" type="text">
+                    <input id="degree-program" required minlength="2" maxlength="160" type="text">
                 </div>
                 <div class="field">
                     <label for="degree-level">Thesis level</label>
-                    <select id="degree-level">
+                    <select id="degree-level" required>
                         <option value="">Select an option</option>
                         <option value="bachelor">Bachelor’s</option>
                         <option value="master" disabled>Master’s · unavailable</option>
@@ -88,7 +94,8 @@
             </div>
             <fieldset aria-describedby="topics-hint">
                 <legend>Topics of interest</legend>
-                <p class="hint" id="topics-hint">Select any topics that interest you. You can choose more than one.</p>
+                <p class="hint" id="topics-hint">Select any available topics that interest you. You can choose more than one. Availability is checked with the database.</p>
+                <button id="refresh-availability" type="button" disabled>Refresh availability</button>
                 <a class="guide-download" href="public/thesis-guide/autum26.pdf" download="thesis-guide-autumn-2026.pdf" hreflang="it" type="application/pdf">Download the thesis guide (PDF, Italian)</a>
                 <!-- Topics A–E from theses/autum26.md, section 4. -->
                 <div class="topics">
@@ -120,31 +127,22 @@
             </fieldset>
             <div class="field" id="other-topic-field" hidden>
                 <label for="other-topic-description">Describe your topic</label>
-                <textarea id="other-topic-description" disabled></textarea>
+                <textarea id="other-topic-description" minlength="20" maxlength="2000" disabled></textarea>
             </div>
             <div class="field">
                 <label for="additional-notes">Additional notes</label>
-                <textarea id="additional-notes" aria-describedby="notes-hint"></textarea>
+                <textarea id="additional-notes" maxlength="3000" aria-describedby="notes-hint"></textarea>
                 <p class="hint" id="notes-hint">Optional: share any preferences, relevant experience, questions, or timing considerations.</p>
             </div>
-            <button type="submit" disabled aria-describedby="form-status">Submit application · coming soon</button>
+            <div class="honeypot" aria-hidden="true">
+                <label for="website">Website (leave blank)</label>
+                <input id="website" type="text" tabindex="-1" autocomplete="off" maxlength="200">
+            </div>
+            <button id="submit-application" type="submit" disabled aria-describedby="form-status">Submit application</button>
         </form>
         <footer>Jesús F. Cevallos-Moreno · University of Insubria</footer>
     </main>
-    <script>
-        const otherTopic = document.getElementById('topic-other');
-        const otherTopicField = document.getElementById('other-topic-field');
-        const otherTopicDescription = document.getElementById('other-topic-description');
-
-        function updateOtherTopic() {
-            otherTopicField.hidden = !otherTopic.checked;
-            otherTopicDescription.disabled = !otherTopic.checked;
-            otherTopic.setAttribute('aria-expanded', String(otherTopic.checked));
-        }
-
-        otherTopic.addEventListener('change', updateOtherTopic);
-        window.addEventListener('pageshow', updateOtherTopic);
-        updateOtherTopic();
-    </script>
+    <script src="public/supabase-config.js"></script>
+    <script src="public/thesis-application.js"></script>
 </body>
 </html>
