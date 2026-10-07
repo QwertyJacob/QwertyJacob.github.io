@@ -4,3 +4,6 @@
 [submodule "QwertyJacob"]
 	path = QwertyJacob
 	url = https://github.com/QwertyJacob/QwertyJacob.git
+[submodule "theses"]
+	path = theses
+	url = https://github.com/QwertyJacob/theses.git

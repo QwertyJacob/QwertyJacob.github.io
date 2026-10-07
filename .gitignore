@@ -1,0 +1,7 @@
+# Credenziali locali: non devono entrare in Git o negli artefatti del sito.
+.env
+.env.*
+*.env
+*.env.*
+!.env.example
+!*.env.example

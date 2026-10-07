@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thesis application | Jesús F. Cevallos-Moreno</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { margin: 0; background: #f9fafb; color: #1a1a1a; font-family: Inter, system-ui, sans-serif; line-height: 1.6; }
+        a { color: inherit; text-underline-offset: 4px; }
+        a:hover { color: #b93838; }
+        :focus-visible { outline: 3px solid #4285f4; outline-offset: 4px; }
+        header { background: white; border-bottom: 1px solid #e5e7eb; }
+        nav { max-width: 960px; margin: auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+        .brand { font-family: monospace; font-size: 1.2rem; font-weight: 700; text-decoration: none; color: #b93838; }
+        main { max-width: 760px; margin: 48px auto; padding: 0 24px; }
+        .eyebrow { color: #b93838; font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+        h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.2; margin: 12px 0 16px; }
+        .intro { color: #4b5563; margin-bottom: 28px; }
+        .notice { padding: 20px; background: #fff1f1; border: 1px solid #f5cccc; border-radius: 12px; margin-bottom: 28px; }
+        .notice p { margin: 6px 0 0; }
+        form { background: white; padding: 32px; border: 1px solid #e5e7eb; border-radius: 20px; box-shadow: 0 6px 24px rgb(0 0 0 / .04); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .field { margin-bottom: 20px; min-width: 0; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; }
+        input, select, textarea { width: 100%; padding: 12px 14px; border: 1px solid #d1d5db; border-radius: 10px; font: inherit; color: inherit; background: white; }
+        textarea { min-height: 140px; resize: vertical; }
+        .hint { font-size: .875rem; color: #4b5563; margin: 8px 0 0; }
+        fieldset { min-width: 0; padding: 0; border: 0; margin: 0 0 24px; }
+        legend { padding: 0; font-weight: 600; }
+        .topics { display: grid; gap: 12px; margin-top: 16px; }
+        .guide-download { display: inline-flex; align-items: center; padding: 10px 18px; margin-top: 12px; border: 1px solid #b93838; border-radius: 999px; color: #b93838; font-weight: 600; text-decoration: none; }
+        .guide-download:hover { background: #fff1f1; }
+        .topic { display: flex; align-items: flex-start; gap: 12px; padding: 16px; margin: 0; border: 1px solid #d1d5db; border-radius: 10px; cursor: pointer; }
+        .topic:has(input:checked) { background: #fff1f1; border-color: #b93838; }
+        .topic input { width: 20px; height: 20px; padding: 0; margin: 3px 0 0; flex-shrink: 0; accent-color: #b93838; }
+        .topic strong { display: block; }
+        .topic .hint { display: block; font-weight: 400; margin-top: 4px; }
+        button { border: 0; border-radius: 999px; padding: 14px 24px; font: inherit; font-weight: 600; background: #e5e7eb; color: #4b5563; cursor: not-allowed; }
+        footer { margin: 28px 0; font-size: .875rem; color: #4b5563; }
+        @media (max-width: 540px) { .grid { grid-template-columns: 1fr; gap: 0; } form { padding: 24px 20px; } main { margin-top: 32px; padding: 0 16px; } }
+    </style>
+</head>
+<body>
+    <header>
+        <nav aria-label="Main navigation">
+            <a class="brand" href="index.html">Jesús.Cevallos()</a>
+            <a href="index.html#teaching">← Back to the website</a>
+        </nav>
+    </header>
+    <main>
+        <p class="eyebrow">Thesis supervision</p>
+        <h1>Apply for a thesis</h1>
+        <p class="intro">Interested in working on your thesis with Jesús F. Cevallos-Moreno? This form will collect your contact details and the topics you are interested in.</p>
+        <aside class="notice" id="form-status" aria-label="Form status">
+            <strong>Form coming soon</strong>
+            <p>This is a preview. Submission is not available yet, and any details you enter are neither sent nor saved.</p>
+        </aside>
+        <!-- Static preview only. Keep submission disabled until the backend is connected. -->
+        <form aria-label="Thesis application" aria-describedby="form-status" onsubmit="return false;">
+            <div class="grid">
+                <div class="field">
+                    <label for="first-name">First name</label>
+                    <input id="first-name" type="text" autocomplete="given-name">
+                </div>
+                <div class="field">
+                    <label for="last-name">Last name</label>
+                    <input id="last-name" type="text" autocomplete="family-name">
+                </div>
+            </div>
+            <div class="field">
+                <label for="email">University email</label>
+                <input id="email" type="email" autocomplete="email">
+            </div>
+            <div class="grid">
+                <div class="field">
+                    <label for="degree-program">Degree programme</label>
+                    <input id="degree-program" type="text">
+                </div>
+                <div class="field">
+                    <label for="degree-level">Thesis level</label>
+                    <select id="degree-level">
+                        <option value="">Select an option</option>
+                        <option value="bachelor">Bachelor’s</option>
+                        <option value="master" disabled>Master’s · unavailable</option>
+                    </select>
+                </div>
+            </div>
+            <fieldset aria-describedby="topics-hint">
+                <legend>Topics of interest</legend>
+                <p class="hint" id="topics-hint">Select any topics that interest you. You can choose more than one.</p>
+                <a class="guide-download" href="public/thesis-guide/autum26.pdf" download="thesis-guide-autumn-2026.pdf" hreflang="it" type="application/pdf">Download the thesis guide (PDF, Italian)</a>
+                <!-- Topics A–E from theses/autum26.md, section 4. -->
+                <div class="topics">
+                    <label class="topic" for="topic-a">
+                        <input id="topic-a" type="checkbox" value="autumn26-a">
+                        <span><strong>A · Is additivity a property of the model or of aggregation?</strong><span class="hint">Test whether additive representations of attacks reflect what a model has learned or simply how network traffic is averaged.</span></span>
+                    </label>
+                    <label class="topic" for="topic-b">
+                        <input id="topic-b" type="checkbox" value="autumn26-b">
+                        <span><strong>B · Which ATT&amp;CK techniques can be linearly decoded from traffic?</strong><span class="hint">Measure which attack techniques can be identified from network traffic representations using simple linear classifiers.</span></span>
+                    </label>
+                    <label class="topic" for="topic-c">
+                        <input id="topic-c" type="checkbox" value="autumn26-c">
+                        <span><strong>C · Order invariance and its security consequences</strong><span class="hint">Investigate whether an intrusion detection system distinguishes attacks that use the same techniques in different orders.</span></span>
+                    </label>
+                    <label class="topic" for="topic-d">
+                        <input id="topic-d" type="checkbox" value="autumn26-d">
+                        <span><strong>D · Does supervised fine-tuning destroy compositional geometry?</strong><span class="hint">Track how fine-tuning changes the structure of pretrained network traffic representations and their ability to encode distinct attack concepts.</span></span>
+                    </label>
+                    <label class="topic" for="topic-e">
+                        <input id="topic-e" type="checkbox" value="autumn26-e">
+                        <span><strong>E · A benchmark for compositional novelty</strong><span class="hint">Build a benchmark that separates unseen combinations of attack techniques from changes in network conditions.</span></span>
+                    </label>
+                    <label class="topic" for="topic-other">
+                        <input id="topic-other" type="checkbox" value="other" aria-controls="other-topic-field" aria-expanded="false">
+                        <span><strong>Other</strong><span class="hint">Suggest a different topic or an idea of your own.</span></span>
+                    </label>
+                </div>
+            </fieldset>
+            <div class="field" id="other-topic-field" hidden>
+                <label for="other-topic-description">Describe your topic</label>
+                <textarea id="other-topic-description" disabled></textarea>
+            </div>
+            <div class="field">
+                <label for="additional-notes">Additional notes</label>
+                <textarea id="additional-notes" aria-describedby="notes-hint"></textarea>
+                <p class="hint" id="notes-hint">Optional: share any preferences, relevant experience, questions, or timing considerations.</p>
+            </div>
+            <button type="submit" disabled aria-describedby="form-status">Submit application · coming soon</button>
+        </form>
+        <footer>Jesús F. Cevallos-Moreno · University of Insubria</footer>
+    </main>
+    <script>
+        const otherTopic = document.getElementById('topic-other');
+        const otherTopicField = document.getElementById('other-topic-field');
+        const otherTopicDescription = document.getElementById('other-topic-description');
+
+        function updateOtherTopic() {
+            otherTopicField.hidden = !otherTopic.checked;
+            otherTopicDescription.disabled = !otherTopic.checked;
+            otherTopic.setAttribute('aria-expanded', String(otherTopic.checked));
+        }
+
+        otherTopic.addEventListener('change', updateOtherTopic);
+        window.addEventListener('pageshow', updateOtherTopic);
+        updateOtherTopic();
+    </script>
+</body>
+</html>
