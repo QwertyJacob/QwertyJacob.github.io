@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src https://kmfpuqswhgslmhvekphl.supabase.co; img-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+    <title>Thesis administration | Jesús F. Cevallos-Moreno</title>
+    <link rel="stylesheet" href="public/thesis-admin.css">
+</head>
+<body>
+    <header><nav aria-label="Main navigation">
+        <a class="brand" href="index.html">Jesús.Cevallos()</a>
+        <a href="tesi.html">← Thesis applications</a>
+    </nav></header>
+    <main>
+        <p class="eyebrow">Private administration</p>
+        <h1>Thesis applications</h1>
+        <p class="intro">Applications in order of arrival and confirmed thesis assignments. All dates are shown in Europe/Rome.</p>
+        <p class="notice" id="admin-status" role="status" aria-live="polite" aria-atomic="true">Sign in with your administrator email.</p>
+        <noscript><p>Enable JavaScript to sign in.</p></noscript>
+        <section id="login-panel" aria-label="Administrator sign in">
+            <form id="email-form">
+                <label for="admin-email">Administrator email</label>
+                <input id="admin-email" type="email" autocomplete="email" required maxlength="254">
+                <button id="send-code" type="submit" disabled>Send sign-in code</button>
+            </form>
+            <form id="code-form" hidden>
+                <label for="admin-code">Email sign-in code</label>
+                <input id="admin-code" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" minlength="6" maxlength="10" required aria-describedby="code-hint">
+                <p class="hint" id="code-hint">Enter the code from your email. Only an account approved by the supervisor can open this area.</p>
+                <button id="verify-code" type="submit">Sign in</button>
+                <button id="change-email" class="secondary" type="button">Use another email</button>
+            </form>
+        </section>
+        <div id="dashboard" hidden>
+            <div class="toolbar"><button id="refresh-all" type="button">Refresh all</button><button id="logout" class="secondary" type="button">Log out</button></div>
+            <p class="hint">Read-only view. Refresh starts a new list and includes new arrivals.</p>
+            <section aria-labelledby="applications-heading">
+                <h2 id="applications-heading">Applications · oldest first</h2>
+                <p id="applications-status" role="status" aria-live="polite"></p>
+                <div id="applications-list" class="records" aria-busy="false"></div>
+                <button id="applications-more" type="button" hidden>Load more applications</button>
+            </section>
+            <section aria-labelledby="assignments-heading">
+                <h2 id="assignments-heading">Confirmed assignments</h2>
+                <p class="hint">An assignment can be recorded without an application. Its assignment date is separate from the application arrival date.</p>
+                <p id="assignments-status" role="status" aria-live="polite"></p>
+                <div id="assignments-list" class="records" aria-busy="false"></div>
+                <button id="assignments-more" type="button" hidden>Load more assignments</button>
+            </section>
+        </div>
+        <footer>Jesús F. Cevallos-Moreno · University of Insubria</footer>
+    </main>
+    <script src="public/supabase-config.js"></script>
+    <script src="public/thesis-admin.js"></script>
+</body>
+</html>

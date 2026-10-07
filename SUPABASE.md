@@ -198,15 +198,231 @@ In alternativa, nell'SQL Editor autenticato:
 select created_at, first_name, last_name, email, degree_programme,
        thesis_level, topics, other_description, additional_notes
 from public.thesis_applications
-order by created_at desc;
+order by created_at asc, id asc;
 ```
 
 Non creare viste pubbliche o policy SELECT per consultare le iscrizioni.
 Scaricare eventuali esportazioni solo in una directory privata fuori dalla
 repository e dagli artefatti del sito. I record restano fino alla cancellazione
 amministrativa: concordare un periodo di conservazione adatto alle tesi e
-cancellarli privatamente dopo quel periodo. Nessuna interfaccia amministrativa
-pubblica è stata aggiunta.
+cancellarli privatamente dopo quel periodo. L'interfaccia amministrativa descritta
+sotto usa RPC protette; la pagina statica di login non espone le tabelle.
+
+### Area di amministrazione delle tesi
+
+`tesi.html` ora collega `thesis-admin.html`. La pagina è in inglese, di sola
+lettura e usa esclusivamente la configurazione di `public/supabase-config.js`
+e la sessione personale Supabase Auth. Non ha dipendenze JavaScript esterne,
+registrazione pubblica, password o chiavi amministrative nel browser.
+La migration `supabase/migrations/202610070004_thesis_administration.sql`
+è stata applicata il **7 ottobre 2026** allo stesso progetto PSI.
+Inizialmente non erano autorizzati commit, push o pubblicazione. Il 7 ottobre
+l'utente ha poi autorizzato la pubblicazione: il workflow `deploy-pages.yml`
+pubblica il branch main su GitHub Pages con HTTPS. L'area si trova all'URL
+`https://qwertyjacob.github.io/thesis-admin.html`; pubblicare il sito non modifica
+i template, SMTP o redirect di Supabase e non verifica da solo il login OTP.
+Per questa pubblicazione i hook DiSTA sono esclusi soltanto dai comandi Git
+di commit/push con `-c core.hooksPath=/dev/null`, senza cambiarne la configurazione.
+
+#### Autorizzazione e letture private
+
+- `public.thesis_admins` è una allowlist di UUID `auth.users.id`, con foreign key
+  e cancellazione a cascata. Grant revocati a PUBLIC/anon/authenticated/service_role,
+  RLS abilitata e forzata, policy restrittiva di diniego. I client non possono
+  leggerla, scriverla o aggiungersi. L'email non viene usata come autorizzazione.
+- `thesis_admin_access()` restituisce solo un booleano per `auth.uid()` corrente.
+  `thesis_admin_applications()` e `thesis_admin_assignments()` ricontrollano
+  l'allowlist **ad ogni chiamata**, prima di validare i cursori o leggere record.
+  La migration `202610070005_thesis_admin_sessions.sql`, applicata il 7 ottobre,
+  richiede anche che il `session_id` del JWT appartenga all'utente corrente e
+  corrisponda a una sessione Auth esistente, con `not_after` non scaduto.
+  Un JWT privo di session_id, una sessione di un'altra identità o una sessione
+  revocata non permettono letture anche quando il JWT non è ancora scaduto.
+  Sono SECURITY DEFINER con proprietario postgres, search_path vuoto, SQL
+  statico e nomi qualificati; EXECUTE solo ad authenticated, mai anon o PUBLIC.
+  Non-admin: HTTP 403, indipendentemente dal successo del login.
+- Non sono stati cambiati grant o policy sulle tabelle preesistenti, inclusi
+  i dinieghi per i richiedenti. Anche l'amministratore non può usare SELECT/INSERT/
+  UPDATE/DELETE diretti dalle API sulle tabelle private. Non esistono RPC di
+  modifica nel dashboard. Rimuovere un UUID dall'allowlist impedisce subito
+  ulteriori letture attraverso RPC, anche con JWT ancora valido.
+- Le domande sono ordinate per `created_at ASC, id ASC`. La paginazione usa
+  timestamp e UUID come cursore, senza offset; mantiene tutti i microsecondi
+  restituiti da PostgreSQL e un limite superiore acquisito alla prima pagina.
+  Il browser carica 20 record alla volta; il server consente da 1 a 100.
+  **Load more applications** aggiunge la pagina successiva senza duplicati;
+  **Refresh all** ricomincia e include i nuovi arrivi. Il limite superiore
+  esclude nuovi inserimenti successivi; non è uno snapshot MVCC tra richieste:
+  cancellazioni o correzioni amministrative delle date possono cambiare la lista.
+- Le assegnazioni confermate hanno una sezione e paginazione distinte, ordinate
+  per `assigned_at ASC, id ASC`. Un LEFT JOIN privato aggiunge l'arrivo della
+  domanda soltanto quando esiste un `application_id`. Le assegnazioni precedenti
+  sono conservate, senza inventare domande o contatti. Le nuove tesi Other
+  richieste nella sessione sono state registrate soltanto nel database privato;
+  identità e contatti non sono inclusi in migration, fixture o asset pubblici.
+- Date mostrate con `Intl.DateTimeFormat`, timezone `Europe/Rome`. I valori degli
+  studenti sono solo textContent/nodi di testo, inclusi email e descrizioni;
+  non diventano HTML, handler o URL. La CSP permette script/stili locali e
+  connessioni al solo progetto Supabase, vietando script inline ed eval.
+- Sessione, refresh token, cursori e dati rimangono in memoria nella pagina.
+  Nessun localStorage/sessionStorage, cookie, log di payload o esportazione.
+  Le richieste fetch usano `cache: no-store`, `credentials: omit` e
+  `referrerPolicy: no-referrer`. Ricaricare la pagina richiede un nuovo login.
+  Logout cancella immediatamente entrambe le liste, i campi e la sessione,
+  interrompe le richieste e ignora risposte tardive. Anche pagehide, errore
+  401/403, rinnovo fallito e ritorno a una scheda con sessione scaduta cancellano
+  i dati. Se il logout remoto fallisce, la pagina distingue il logout locale
+  dalla revoca non confermata; come in Supabase, i JWT già emessi possono
+  rimanere validi fino alla scadenza per altre API. Le RPC delle tesi controllano
+  inoltre la sessione Auth attuale e negano l'accesso dopo un logout remoto riuscito.
+
+#### Stato Auth verificato e account previsto
+
+Prima del setup, `/auth/v1/settings` mostrava email abilitata, autoconfirm
+disabilitato, signup di progetto abilitato e accesso anonimo Auth disabilitato;
+`auth.users` era vuota. Le credenziali locali non includono service_role,
+secret key o Management API token: non consentono di leggere SMTP, template,
+Site URL e rate limit privati. Non sono state modificate impostazioni Auth
+condivise, provider, signup di progetto o configurazioni email di PSI.
+
+È stato creato **soltanto l'account indicato esplicitamente dall'utente**.
+Lo strumento locale `scripts/thesis_admin.py provision --email <email-approvata>`
+ha usato l'endpoint Auth ufficiale di signup, con password casuale scartata e
+conferma email prevista dalla configurazione esistente; non ha scritto record
+Auth manualmente. L'UUID di quell'account è stato aggiunto all'allowlist privata.
+La conferma email è ora verificata nel database e l'utente ha confermato la
+ricezione dell'email. Questo **non verifica ancora il login OTP del dashboard**.
+Nessun account sintetico persiste dopo i test SQL.
+
+Il browser chiama `/auth/v1/otp` con `create_user: false`, equivalente a
+`signInWithOtp({ options: { shouldCreateUser: false } })`, poi
+`/auth/v1/verify` con email, token e `type: 'email'`. Un login riuscito deve
+superare anche il controllo della allowlist. Il rinnovo usa il refresh token
+in memoria e ricontrolla l'autorizzazione. Nessun callback a redirect o sessione
+nel frammento URL viene importato dalla pagina.
+
+#### Setup manuale ancora necessario per verificare il login
+
+1. Aprire la dashboard privata del progetto, **Authentication > Email Templates
+   > Magic Link** (o “Magic link or OTP”). Ispezionare e conservare la versione
+   attuale, perché è condivisa con PSI. Aggiungere al contenuto esistente:
+
+   ```html
+   <p>Your sign-in code: {{ .Token }}</p>
+   ```
+
+   Conservare eventuali link/testi necessari agli altri client. Per le tesi
+   richiedere un'email nuova e digitare il codice nella pagina; non consumare
+   prima il codice aprendo il link. Non sostituire globalmente template o
+   redirect senza valutare i client PSI. Il dashboard accetta codici numerici
+   da 6 a 10 cifre e non assume una scadenza del codice diversa da quella Auth.
+   Un'email contenente solo un link non mostra l'OTP: aggiungere `.Token`,
+   salvare il template **Magic Link** (non solo Confirm signup), e chiedere
+   una nuova email dal pulsante **Send sign-in code** del dashboard. Se scanner
+   automatici consumano il link, usare un ramo del template senza link per
+   l'account admin, conservando il contenuto preesistente nel ramo degli altri
+   account: `{{ if eq .Email "<email-approvata>" }}...OTP...{{ else }}...contenuto
+   originale...{{ end }}`. L'email approvata si configura nella dashboard privata,
+   senza pubblicarla negli asset o nelle migration.
+2. Ispezionare **Custom SMTP**, eventuali Send Email hook, rate limit e Auth
+   logs. La ricezione della conferma verifica una consegna signup, non il template
+   Magic Link né tutti i flussi. L'SMTP predefinito Supabase consegna solo agli
+   indirizzi autorizzati del team, con limiti bassi; un indirizzo esterno può
+   richiedere SMTP proprio. Non aggiungere credenziali SMTP al browser o al sito.
+3. L'utente ha riportato un link di conferma che terminava su
+   `http://localhost:3000/#error=access_denied&error_code=otp_expired`.
+   Il database mostra ora l'account confermato. Il link era monouso e risultava
+   consumato/scaduto: un'apertura precedente o una scansione email sono possibili
+   cause, non accertate. Il redirect localhost indica anche una configurazione
+   URL/template da verificare nella dashboard. **URL Configuration** contiene
+   Site URL e Redirect URLs: preservare quelli di PSI e concordare una
+   destinazione HTTPS valida per i flussi che usano link. Il login tramite codice
+   di questa pagina non richiede modifiche al Site URL né redirect.
+   In seguito è stato condiviso un URL con sessione magic-link: indica che Auth
+   ha emesso una sessione, non che il dashboard OTP sia stato aperto. Le credenziali
+   non sono state copiate nei file o nei log. È stata revocata esclusivamente
+   quella sessione, verificando prima proprietà e FK: la cancellazione di
+   `auth.sessions` annulla in cascata i suoi refresh token. Il controllo sessione
+   della migration 005 impedisce anche al relativo JWT ancora valido di leggere
+   i dati delle tesi. Account e allowlist sono conservati per un nuovo login.
+4. Aprire la pagina con HTTPS in produzione. Il login è disabilitato su HTTP
+   remoto; per sviluppo è ammesso solo il loopback. Non usare un server statico
+   sulla radice della repository. Anteprima locale con allowlist di soli asset:
+
+   ```sh
+   python3 scripts/serve_thesis_admin.py --port 8765
+   # Aprire http://localhost:8765/thesis-admin.html
+   ```
+
+   Il server ascolta esclusivamente su 127.0.0.1, non registra richieste,
+   invia Cache-Control no-store e non serve supa.env, Git o directory listings.
+5. Dopo il setup del template, richiedere un codice nuovo, completare il login,
+   controllare le due liste e il logout. Questa prova con il codice ricevuto
+   personalmente è ancora necessaria: non condividere OTP, token o screenshot
+   dei record privati nella chat. Nessun login reale viene dichiarato verificato
+   soltanto perché le fixture passano.
+
+Per una ricreazione dell'account, usare **Authentication > Users** nella dashboard
+o `provision` solo per l'email approvata; se il signup è disabilitato, lo strumento
+richiede la creazione dalla dashboard senza modificare il flag condiviso.
+`grant` richiede esattamente un account con quell'email e non aggiunge un secondo
+admin se ne esiste un altro. Non inserire manualmente auth.users/auth.identities.
+Per un account creato dalla dashboard oppure per revocare l'accesso:
+
+```sh
+export THESIS_DB_HOST=aws-0-eu-west-1.pooler.supabase.com
+/tmp/thesis-tools-venv/bin/python scripts/thesis_admin.py inspect
+/tmp/thesis-tools-venv/bin/python scripts/thesis_admin.py grant --email <email-approvata>
+/tmp/thesis-tools-venv/bin/python scripts/thesis_admin.py revoke --email <email-approvata>
+```
+
+GitHub Pages pubblica `thesis-admin.html`, `tesi.html` e i relativi asset public/
+dal checkout Git, senza supa.env escluso da Git. Lo script DiSTA sincronizza una homepage legacy
+e public/, ma non queste pagine HTML: prima di usarlo occorre includerle
+esplicitamente e verificare HTTPS. Non è stato invocato o modificato durante
+questo lavoro.
+
+#### Verifiche dell'amministrazione
+
+```sh
+export THESIS_DB_HOST=aws-0-eu-west-1.pooler.supabase.com
+/tmp/thesis-tools-venv/bin/python scripts/thesis_db.py test
+/tmp/thesis-tools-venv/bin/python scripts/test_thesis_admin.py
+/tmp/thesis-tools-venv/bin/python scripts/test_thesis_admin_api.py
+/tmp/thesis-tools-venv/bin/python scripts/test_thesis_form.py
+```
+
+- Database reale, fixture nella transazione annullata: lettura admin tramite
+  RPC; diniego anon; utente authenticated non-admin e admin senza grant diretti;
+  impossibilità di autoiscrizione all'allowlist o modifica dei dati; dinieghi
+  restrittivi anche con grant SELECT temporaneamente aggiunti e poi annullati;
+  revoca dell'allowlist e della sessione tra due richieste, sessione Auth mancante/
+  scaduta/di altra identità; limiti/cursori invalidi; ordinamento timestamp/UUID
+  a parità di data; microsecondi; paginazione dopo cancellazione di una riga già
+  letta e inserimento successivo al limite superiore; pagina vuota; date di
+  assegnazione e arrivo distinte. Le identità/JWT claims dei test di ruolo sono
+  simulate **nel database**, senza provisionare altri account reali.
+- Chromium con Auth/RPC simulate e soli dati sintetici: nessuna registrazione,
+  codice/login negato per non-admin, caricamento, vuoto, errore rete/server,
+  recovery con refresh, entrambe le paginazioni e cursori invariati, date Roma,
+  contenuto ostile come testo, assenza di storage/cookie, rinnovo/scadenza,
+  errori 401/403, logout immediato e risposta tardiva, logout remoto fallito,
+  blocco HTTP e impossibilità di servire supa.env. Non prova la consegna email
+  né l'autenticazione dell'account personale con le API reali.
+- Confronto prima/dopo migration: definizione di poll_counts, grant/policy di
+  votes e di tutte le tabelle thesis preesistenti invariati; record delle
+  assegnazioni conservati. La disponibilità reale continua a chiudere D e
+  mantenere Other disponibile anche dopo più assegnazioni personalizzate.
+- API REST reale con sola chiave publishable: anon non può leggere nessuna delle
+  tre tabelle private né chiamare le tre RPC amministrative; l'endpoint pubblico
+  di disponibilità restituisce soltanto topic_id/available. Le prove con JWT
+  firmato di un admin/non-admin reale restano parte della verifica login manuale.
+
+Riferimenti: [OTP/email](https://supabase.com/docs/guides/auth/auth-email-passwordless),
+[template e link consumati dagli scanner](https://supabase.com/docs/guides/auth/auth-email-templates),
+[SMTP](https://supabase.com/docs/guides/auth/auth-smtp),
+[redirect](https://supabase.com/docs/guides/auth/redirect-urls),
+[logout e durata JWT](https://supabase.com/docs/reference/javascript/auth-signout).
 
 ### Amministrazione e verifica
 
