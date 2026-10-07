@@ -2,6 +2,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Pubblica tutto · GitHub + DiSTA",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "bash scripts/publish_site.sh",
+            "cwd": "${workspaceFolder}"
+        },
+        {
             "name": "GitHub Page · locale",
             "type": "pwa-chrome",
             "request": "launch",

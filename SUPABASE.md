@@ -234,9 +234,26 @@ policy o grant del progetto condiviso. I test SQL e API delle autorizzazioni
 restano disponibili nei relativi file di `supabase/tests/` e
 `scripts/test_thesis_admin_api.py`.
 
-La pubblicazione usa il workflow GitHub Pages `deploy-pages.yml` sul branch
-main. I hook DiSTA vengono esclusi soltanto dai comandi di commit/push con
-`-c core.hooksPath=/dev/null`, senza modificarne la configurazione.
+La pubblicazione completa si avvia con `./scripts/publish_site.sh`, oppure da
+VS Code selezionando **Pubblica tutto · GitHub + DiSTA** in **Run and Debug**
+e premendo Play (F5). Lo stesso comando è disponibile in **Tasks: Run Task**.
+Salvare prima tutti i file: il comando include tutte le modifiche non ignorate,
+crea un commit su `main`, esegue il push e pubblica sul server DiSTA. Usa lo stesso
+commit per entrambi i siti e attende il risultato del workflow GitHub Pages
+`deploy-pages.yml`. `supa.env` e gli altri file dotenv di credenziali restano esclusi.
+
+Lo script richiede Git, GitHub CLI (`gh`, già autenticato), SSH, rsync e tar;
+controlla la connessione al server prima del commit. Il messaggio predefinito è
+`Publish website updates`; per cambiarlo usare
+`./scripts/publish_site.sh -m "Descrizione delle modifiche"`.
+`./scripts/publish_site.sh --dry-run` mostra i file interessati senza commit,
+push o scritture remote. Se una fase fallisce, correggere l'errore e rilanciare:
+senza nuove modifiche viene ripubblicato il commit attuale.
+
+Il deploy DiSTA riusa `scripts/deploy_dista.sh`: homepage DiSTA come `index.html`,
+`tesi.html`, CV, foto e `public/`. I hook DiSTA vengono esclusi soltanto dai comandi
+di commit/push dello script con `-c core.hooksPath=/dev/null`, per evitare deploy
+duplicati, senza modificarne la configurazione.
 
 ### Amministrazione e verifica
 
